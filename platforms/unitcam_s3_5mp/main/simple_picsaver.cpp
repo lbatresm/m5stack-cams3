@@ -4,7 +4,6 @@
 #include "board_sd.hpp"
 #include "pic_crypto.hpp"
 #include <cstdio>
-#include <ctime>
 #include <vector>
 #include <esp_log.h>
 #include <esp_timer.h>
@@ -53,31 +52,17 @@ void simple_picsaver_tick()
     if (!board_camera_grab_jpeg(jpeg))
         return;
 
-    const time_t t = time(nullptr);
-    struct tm lt_buf {};
-    struct tm* lt = localtime_r(&t, &lt_buf);
+    // Elapsed since boot (esp_timer): HHHH hours, MM minutes within that hour, SS seconds — unique at 1 fps.
+    const uint64_t total_sec = esp_timer_get_time() / 1000000ULL;
+    const uint64_t h = total_sec / 3600ULL;
+    const uint64_t m = (total_sec % 3600ULL) / 60ULL;
+    const uint64_t s = total_sec % 60ULL;
 
     char path[128];
-    if (lt != nullptr && (lt->tm_year + 1900) >= 2024)
-    {
-        if (pic_crypto_is_enabled())
-            std::snprintf(path, sizeof(path), "%s/%04d%02d%02d_%02d%02d%02d_%llu.ucam", k_folder, lt->tm_year + 1900,
-                          lt->tm_mon + 1, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec,
-                          static_cast<unsigned long long>(esp_timer_get_time() / 1000ULL));
-        else
-            std::snprintf(path, sizeof(path), "%s/%04d%02d%02d_%02d%02d%02d_%llu.jpg", k_folder, lt->tm_year + 1900,
-                          lt->tm_mon + 1, lt->tm_mday, lt->tm_hour, lt->tm_min, lt->tm_sec,
-                          static_cast<unsigned long long>(esp_timer_get_time() / 1000ULL));
-    }
+    if (pic_crypto_is_enabled())
+        std::snprintf(path, sizeof(path), "%s/%04llu_%02llu_%02llu.ucam", k_folder, h, m, s);
     else
-    {
-        const uint64_t us = esp_timer_get_time();
-        if (pic_crypto_is_enabled())
-            std::snprintf(path, sizeof(path), "%s/boot_%llu.ucam", k_folder,
-                          static_cast<unsigned long long>(us / 1000000ULL));
-        else
-            std::snprintf(path, sizeof(path), "%s/boot_%llu.jpg", k_folder, static_cast<unsigned long long>(us / 1000000ULL));
-    }
+        std::snprintf(path, sizeof(path), "%s/%04llu_%02llu_%02llu.jpg", k_folder, h, m, s);
 
     const uint8_t* write_ptr = jpeg.data();
     size_t write_len = jpeg.size();

@@ -4,6 +4,8 @@ Firmware for the **M5Stack UnitCam S3 (5MP)** that saves **one JPEG per second**
 
 **Where files go:** `simple_picsaver/` on the FAT volume (full path on device: `/sdcard/simple_picsaver/`). Use a **FAT32** card. You can optionally **encrypt** each JPEG (see below); files are then named `*.ucam`.
 
+**Names:** uptime since power-on, `HHHH_MM_SS.jpg` (or `.ucam`): hours, minutes within that hour, seconds (so names stay unique at one photo per second). Resets after each reboot.
+
 **Feedback:** the LED **toggles** each time a frame is written successfully.
 
 **Pins:** `platforms/unitcam_s3_5mp/main/board_pins.hpp`
