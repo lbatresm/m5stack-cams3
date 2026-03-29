@@ -54,3 +54,6 @@ CONFIG_ARDUINO_SELECTIVE_SD=y
 # CONFIG_ARDUINO_SELECTIVE_BLE is not set
 # CONFIG_ARDUINO_SELECTIVE_BluetoothSerial is not set
 # CONFIG_ARDUINO_SELECTIVE_SimpleBLE is not set
+
+# Optional JPEG encryption (see README). Empty = plain .jpg on SD.
+CONFIG_PICSAVER_ENCRYPTION_PASSWORD=""

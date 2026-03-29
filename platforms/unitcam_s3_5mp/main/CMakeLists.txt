@@ -5,6 +5,7 @@ idf_component_register(
         "board_camera.cpp"
         "board_sd.cpp"
         "board_thermal.cpp"
+        "pic_crypto.cpp"
         "simple_picsaver.cpp"
     INCLUDE_DIRS
         "."
@@ -15,4 +16,5 @@ idf_component_register(
         esp_timer
         driver
         fatfs
+        mbedtls
 )

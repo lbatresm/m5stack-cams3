@@ -9,3 +9,5 @@ dependencies.lock
 /output
 
 sdkconfig.old
+# Local config from menuconfig; use sdkconfig.defaults in the repo
+sdkconfig

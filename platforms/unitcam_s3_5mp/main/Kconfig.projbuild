@@ -1,0 +1,12 @@
+menu "Picsaver (SD JPEG)"
+
+config PICSAVER_ENCRYPTION_PASSWORD
+    string "Passphrase for AES-256-GCM file encryption"
+    default ""
+    help
+        If non-empty, each JPEG is encrypted before writing; filenames use the .ucam suffix.
+        Leave empty to save normal .jpg files.
+        The same passphrase is used with tools/decrypt_ucam.py on your PC.
+        Note: the passphrase is stored in firmware image and sdkconfig — not secret from someone with flash access.
+
+endmenu
