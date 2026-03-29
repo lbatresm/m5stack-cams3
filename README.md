@@ -1,4 +1,4 @@
-# UnitCam S3 5MP — SD capture
+# M5Stack UnitCam S3 5MP — SD capture
 
 Firmware for the **M5Stack UnitCam S3 (5MP)** that saves **one JPEG per second** to the microSD card while power is on. Includes chip overheating protection.
 
