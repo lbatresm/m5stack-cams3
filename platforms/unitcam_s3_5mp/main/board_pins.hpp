@@ -1,0 +1,30 @@
+#pragma once
+
+// UnitCam S3 5MP — pins (from original HAL)
+
+#define BOARD_PIN_LED 14
+#define BOARD_PIN_BUTTON_A 0
+
+#define BOARD_PIN_SD_CS 9
+#define BOARD_PIN_SD_MOSI 38
+#define BOARD_PIN_SD_CLK 39
+#define BOARD_PIN_SD_MISO 40
+
+#define BOARD_XCLK_FREQ_HZ 20000000
+
+#define CAMERA_PIN_PWDN -1
+#define CAMERA_PIN_RESET 21
+#define CAMERA_PIN_VSYNC 42
+#define CAMERA_PIN_HREF 18
+#define CAMERA_PIN_PCLK 12
+#define CAMERA_PIN_XCLK 11
+#define CAMERA_PIN_SIOD 17
+#define CAMERA_PIN_SIOC 41
+#define CAMERA_PIN_D0 6
+#define CAMERA_PIN_D1 15
+#define CAMERA_PIN_D2 16
+#define CAMERA_PIN_D3 7
+#define CAMERA_PIN_D4 5
+#define CAMERA_PIN_D5 10
+#define CAMERA_PIN_D6 4
+#define CAMERA_PIN_D7 13

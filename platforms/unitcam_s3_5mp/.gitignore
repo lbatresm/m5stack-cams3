@@ -1,0 +1,11 @@
+build
+.cache
+.vscode
+build.clang
+managed_components
+dependencies.lock
+
+/components/arduino-esp32
+/output
+
+sdkconfig.old

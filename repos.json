@@ -1,0 +1,7 @@
+[
+    {
+        "url": "https://github.com/Forairaaaaa/arduino_lite.git",
+        "path": "platforms/unitcam_s3_5mp/components/arduino-esp32",
+        "branch": "v3.0.2"
+    }
+]

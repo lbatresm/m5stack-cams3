@@ -1,0 +1,18 @@
+idf_component_register(
+    SRCS
+        "app_main.cpp"
+        "board_gpio.cpp"
+        "board_camera.cpp"
+        "board_sd.cpp"
+        "board_thermal.cpp"
+        "simple_picsaver.cpp"
+    INCLUDE_DIRS
+        "."
+    REQUIRES
+        arduino-esp32
+        esp32-camera
+        nvs_flash
+        esp_timer
+        driver
+        fatfs
+)
