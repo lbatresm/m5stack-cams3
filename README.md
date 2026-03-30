@@ -4,7 +4,7 @@ Firmware for the **M5Stack UnitCam S3 (5MP)** that saves **one JPEG per second**
 
 **Where files go:** `simple_picsaver/` on the FAT volume (full path on device: `/sdcard/simple_picsaver/`). Use a **FAT32** card. You can optionally **encrypt** each JPEG (see below); files are then named `*.ucam`.
 
-**Names:** uptime since power-on, `HHHH_MM_SS.jpg` (or `.ucam`): hours, minutes within that hour, seconds (so names stay unique at one photo per second). Resets after each reboot.
+**Names:** uptime since power-on, `HHHH_MM_SS.jpg` (or `.ucam`): hours, minutes within that hour, seconds. Resets after each reboot.
 
 **Feedback:** the LED **toggles** each time a frame is written successfully.
 
@@ -67,7 +67,7 @@ idf.py build
 
 2. **Rebuild and flash** (`idf.py build` then `idf.py -p PORT flash`).
 
-3. On the SD card you will see files like `20260101_120000_123.ucam` instead of `.jpg`.
+3. On the SD card you will see `*.ucam` files (see **Names** above for the uptime pattern).
 
 4. **Decrypt on your computer** (Python 3):
 
@@ -79,3 +79,17 @@ idf.py build
    One `.jpg` is written next to each `.ucam` (or `python tools/decrypt_ucam.py path/to/folder -p "..."` for every `*.ucam`; optional `-o other_folder` for outputs).
 
 The firmware uses **PBKDF2-HMAC-SHA256** (10000 iterations) and **AES-256-GCM**. The passphrase is stored in **flash and `sdkconfig`**; anyone with the firmware image or full flash dump could recover it. For stronger protection, use Espressif **flash encryption** / secure boot and treat this as protection against casual SD access only.
+
+## Keyframe filter (optional)
+
+Keeps only frames that differ enough from the **previous** frame (good for motion detection highlight):
+
+   ```bash
+   pip install pycryptodome pillow
+   python tools/ucam_keyframes.py path/to/folder_with_ucam -p "YOUR_PASSPHRASE" -o path/to/output_keyframes
+   ```
+
+   Adjust sensitivity with `-t` (default mean absolute difference `8.0` on a 0–255 grayscale scale; lower = more frames kept). Use `--dry-run` to see decisions without writing files.
+
+   With **`--debug`**, the script also writes plots **`tools/ucam_diff_histogram.png`** (histogram with the mean absolute differences, useful to stablish a reasonable threshold; install **`matplotlib`** for the PNG).
+
