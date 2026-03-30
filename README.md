@@ -1,4 +1,4 @@
-# UnitCam S3 5MP — SD capture
+# M5Stack UnitCam S3 5MP — SD capture
 
 Firmware for the **M5Stack UnitCam S3 (5MP)** that saves **one JPEG per second** to the microSD card while power is on. Includes chip overheating protection.
 
@@ -91,5 +91,5 @@ Keeps only frames that differ enough from the **previous** frame (good for motio
 
    Adjust sensitivity with `-t` (default mean absolute difference `8.0` on a 0–255 grayscale scale; lower = more frames kept). Use `--dry-run` to see decisions without writing files.
 
-   With **`--debug`**, the script also writes plots **`tools/ucam_diff_histogram.png`** (histogram with the mean absolute differences, useful to stablish a reasonable threshold; install **`matplotlib`** for the PNG).
+   With **`--debug`**, the script also writes plots **`tools/ucam_diff_histogram.png`** (histogram with the mean absolute differences, useful to establish a reasonable threshold; install **`matplotlib`** for the PNG).
 
